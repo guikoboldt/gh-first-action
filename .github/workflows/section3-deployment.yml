@@ -56,4 +56,4 @@ jobs:
             - name: Run Build
               run: |
                 cd section3-practice
-                npm build
+                npm run build
