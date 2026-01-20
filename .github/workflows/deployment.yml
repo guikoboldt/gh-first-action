@@ -1,0 +1,39 @@
+name: Deploy Project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repo
+        uses: actions/checkout@v3
+      - name: Isntall node # ubuntu runner from github already install node. But in other runners it might be required.continue-on-error: 
+        uses: actions/setup-node@v3
+        with: #this is how you can configure the action. Like parameters
+          node-version: 18
+      - name: Install dependencies
+        run: |
+          cd second-action-react-demo
+          npm ci
+      - name: Run tests
+        run: |
+          cd second-action-react-demo
+          npm test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repo
+        uses: actions/checkout@v3
+      - name: Isntall node # ubuntu runner from github already install node. But in other runners it might be required.continue-on-error: 
+        uses: actions/setup-node@v3
+        with: #this is how you can configure the action. Like parameters
+          node-version: 18
+      - name: Install dependencies #added cd command because the workflow is running on the root repo folder. We need to navigate to the folder that contains the package-lock.json to run npm ci
+        run: |
+          cd second-action-react-demo
+          npm ci
+      - name: Build project
+        run:  |
+          cd second-action-react-demo
+          npm run build
+      - name: Deploy
+        run: echo "Deploying..."
