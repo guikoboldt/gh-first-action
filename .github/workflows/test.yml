@@ -11,6 +11,8 @@ jobs:
         with: #this is how you can configure the action. Like parameters
           node-version: 18
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd second-action-react-demo
+          npm ci
       - name: Run tests
         run: npm test
