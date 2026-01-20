@@ -1,0 +1,24 @@
+name: section3-deployment
+on:
+    push:
+        paths:
+            - '**/section3-deployment/**'
+            - '**/workflows/section3-deployment.yml'
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get code from repo
+              uses: actions/checkout@v3
+            - name: Isntall node # ubuntu runner from github already install node. But in other runners it might be required.continue-on-error: 
+              uses: actions/setup-node@v3
+              with: #this is how you can configure the action. Like parameters
+                node-version: 18
+            - name: Install dependencies
+              run: |
+                cd section3-practice
+                npm ci
+            - name: Run lint
+              run: |
+                cd section3-practice
+                npm lint
