@@ -14,6 +14,8 @@ on:
       - 'dev-*' #dev-new, dev-this-is-new
       - 'feat/**' #feat/new, feat/new/button
       #developer-1 is will not trigger
+    paths:
+      - '**/section4-demo/**'
     paths-ignore: 
       - '.github/workflows/*'
 jobs:
