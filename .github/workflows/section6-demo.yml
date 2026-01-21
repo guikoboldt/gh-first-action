@@ -15,7 +15,7 @@ jobs:
       MONGODB_CLUSTER_ADDRESS: test.db.address
       MONGODB_USERNAME: test_user
       MONGODB_PASSWORD: test_pwd
-      PORT: 
+      PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
     steps:
