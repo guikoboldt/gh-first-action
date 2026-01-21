@@ -43,7 +43,7 @@ jobs:
         with:
           name: dist-files
           path: |
-            dist
+            section5-demo/dist
             package.json
   deploy:
     needs: build
