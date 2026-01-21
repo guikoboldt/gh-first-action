@@ -42,9 +42,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
-          path: |
-            section5-demo/dist
-            package.json
+          path: section5-demo/dist
+          # path: |
+          #   section5-demo/dist
+          #   section5-demo/package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
