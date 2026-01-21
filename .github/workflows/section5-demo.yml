@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - '**/section5-demo/**'
+      - '**/workflows/section5-demo.yml'
 jobs:
   test:
     runs-on: ubuntu-latest
