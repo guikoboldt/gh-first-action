@@ -16,8 +16,6 @@ on:
       #developer-1 is will not trigger
     paths:
       - '**/section4-demo/**'
-    paths-ignore: 
-      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
