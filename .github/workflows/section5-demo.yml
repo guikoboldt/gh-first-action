@@ -12,11 +12,17 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd section5-demo
+          npm ci
       - name: Lint code
-        run: npm run lint
+        run: |
+          cd section5-demo
+          npm run lint
       - name: Test code
-        run: npm run test
+        run: |
+          cd section5-demo
+          npm run test
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -24,9 +30,13 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm ci
+        run: |
+          cd section5-demo
+          npm ci
       - name: Build website
-        run: npm run build
+        run: |
+          cd section5-demo
+          npm run build
       - name: Upload artifacts
         uses: actions/Upload-artifact@v3
         with:
