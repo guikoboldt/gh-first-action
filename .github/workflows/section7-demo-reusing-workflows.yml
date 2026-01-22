@@ -86,6 +86,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/section7-demo-reusable.yml
+    with:
+      artifact-name: dist-files
   report:
     needs: [lint, deploy]
     if: failure()
