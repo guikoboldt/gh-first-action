@@ -16,9 +16,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: section7-demo/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd section7-demo
           npm ci
@@ -35,9 +36,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: section7-demo/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd section7-demo
           npm ci
@@ -63,9 +65,10 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: section7-demo/node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd section7-demo
           npm ci
@@ -99,4 +102,4 @@ jobs:
       - name: Output info
         run: |
           echo "Somehting went wrong"
-          echo "${{ github }}"
+          echo "${{ toJson(github) }}"
