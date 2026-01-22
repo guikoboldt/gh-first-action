@@ -14,18 +14,21 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container:
-      image: node:16
+    #container:
+      #image: node:16
       #env: #env vars to be inject into the container
     env:
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: mongodb #same name as the service defined bellow. Only works with containers
+      #MONGODB_CLUSTER_ADDRESS: mongodb #same name as the service defined bellow. Only works with containers
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #if you are not running the job in the container, you still can use services, but then you need to setup the network acordling.
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
     services:
       mongodb:
         image: mongo
+        ports:
+          - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
