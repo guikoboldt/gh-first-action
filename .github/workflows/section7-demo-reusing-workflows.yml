@@ -5,7 +5,8 @@ on:
       - main
     paths:
       - '**/section7-demo/**'
-      - '**/workflows/section7-demo.yml'
+      - '**/workflows/section7-demo-reusing-workflows.yml'
+      - '**/workflows/section7-demo-reusable.yml'
 jobs:
   lint:
     runs-on: ubuntu-latest
