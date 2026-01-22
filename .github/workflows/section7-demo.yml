@@ -42,11 +42,13 @@ jobs:
           cd section7-demo
           npm ci
       - name: Test code
+        id: run-tests
         run: |
           cd section7-demo
           npm run test
       - name: Upload test report
-        if: 
+        if: steps.run-tests.outcome == 'failure'
+        # we can use ${{}} in the IF, but if also supports dynamic values directly (GH allows it because tipically you need expressions inside the if condition)
         uses: actions/upload-artifact@v4
         with:
           name: test-report
