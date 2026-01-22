@@ -47,7 +47,7 @@ jobs:
           npm run test
       - name: Upload test report
         if: 
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: section7-demo/test.json
@@ -73,7 +73,7 @@ jobs:
           cd section7-demo
           npm run build
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-files
           path: section7-demo/dist
@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v5
         with:
           name: dist-files
       - name: Output contents
