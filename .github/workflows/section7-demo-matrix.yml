@@ -1,0 +1,28 @@
+name: Section7 - Matrix Demo
+on:
+    push:
+      paths:
+        - '**/section7-demo/**'
+        - '**/workflows/section7-demo-matrix.yml'
+jobs:
+    build:
+        strategy:
+          matrix:
+            node-version: [12, 14, 18]
+            operating-system: [ubuntu-latest, winddows-latest]
+        runs-on: ${{ matrix.operating-system }}
+        steps:
+          - name: Get code
+            uses: actions/checkout@v3
+          - name: Install NodeJS
+            uses: actions/setup-node@v3
+            with:
+                node-version: ${{ matrix.node-version }}
+          - name: Install Dependencies
+            run: |
+                cd section7-demo
+                npm ci
+          - name: Build project
+            run: |
+                cd section7-demo
+                npm run build
