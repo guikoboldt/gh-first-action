@@ -25,10 +25,13 @@ jobs:
       #     cd section9-demo
       #     npm ci
       - name: Load & cache dependencies
+        id: cache-step
         uses: ./.github/actions/cached-deps #using custom action instead of the manual steps defined above
         with:
           package-lock-file-path: 'section9-demo'
           caching: 'false'
+      - name: Output info
+        run: echo "Cache used? ${{ steps.cache-step.outputs.used-cache }}"
       - name: Lint code
         run: |
           cd section9-demo
