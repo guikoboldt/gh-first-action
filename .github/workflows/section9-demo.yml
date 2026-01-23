@@ -34,17 +34,8 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          cd section9-demo
-          npm ci
+      - name: Load & cache dependencies
+        uses: ./.github/actions/cached-deps
       - name: Test code
         id: run-tests
         run: |
@@ -62,17 +53,8 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          cd section9-demo
-          npm ci
+      - name: Load & cache dependencies
+        uses: ./.github/actions/cached-deps
       - name: Build website
         run: |
           cd section9-demo
@@ -81,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
-          path: dist
+          path: section9-demo/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
