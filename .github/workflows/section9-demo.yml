@@ -6,7 +6,7 @@ on:
     paths:
       - '**/section9-demo/**'
       - '**/workflows/section9-demo.yml'
-      - '**/workflows/cached-deps/action.yml'
+      - '**/actions/cached-deps/action.yml'
 jobs:
   lint:
     runs-on: ubuntu-latest
