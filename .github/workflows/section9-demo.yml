@@ -97,4 +97,4 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3 #this is required, as the custom javascript action is defined in our own repository
       - name: Run custom javascript action
-        uses: ./github/actions/deploy-s3-javascript
+        uses: ./.github/actions/deploy-s3-javascript
