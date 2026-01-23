@@ -28,5 +28,5 @@ runs:
       run: |
         cd ${{ inputs.package-lock-file-path }}
         npm ci
-        echo "cache'${{ inputs.caching }}'" >> $GITHUB_OUTPUT
+        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash #when using actions it is required to inform which shell will be used
