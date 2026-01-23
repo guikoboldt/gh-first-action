@@ -77,6 +77,9 @@ jobs:
           name: dist-files
           path: section9-demo/dist
   deploy:
+    permissions: 
+      id-token: write #grants access to the open token id (which will be written by the 'Get AWS permissions' step)
+      contents: read #needs to be configured, because when setting one permission all other permissions are disabled
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -89,14 +92,19 @@ jobs:
           path: ./dist
       - name: Output contents
         run: ls
+      - name: Get AWS persmissions #it needs to be before deploying, because permissions are required to deploy
+        uses: aws-actions/configure-aws-credentials@v1 #this action will setup the open id in our request. Therefore, no more env var required.
+        with: #this improves securety as openID is created for specific things and has specific permissions that are manually configured
+          role-to-assume: arn:aws:iam::<codigos e codigos>:role/<name_role> # aqui precisamos informar a role criada no aws
+          aws-region: us-east-1
       - name: Deploy site
         id: deploy
         #run: echo "Deploying..."
         #uses: ./.github/actions/deploy-s3-javascript
         uses: ./.github/actions/deploy-s3-docker
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # env:
+        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           bucket: bucket_name
           dist-folder: ./dist
