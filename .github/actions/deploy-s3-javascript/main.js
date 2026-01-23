@@ -26,6 +26,9 @@ function run() {
     // const s3Uri = `s3://${bucket}`
     // exec.exec(`aws s3 sync ${distFolder} ${s3Uri} --region ${bucketRegion}`);
 
+    // const websiteUrl = `http://${bucket}.s3-website-${bucketRegion}.amazonaws.com`;
+    // core.setOutput('website-url', websiteUrl); // this is equivalent to echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
+
     // core.notice('Heelo from my custom javascript action!'); -> it will print this message in the github actions
 }
 
