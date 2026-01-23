@@ -1,17 +1,26 @@
 name: 'Get & Cache Dependencies'
 description: 'Get the dependencies (via npm) and cache them.'
+inputs:
+  package-lock-file-path:
+    description: 'Inform where the package-lock.json file can be found, so npm can use it to isntall the dependencies'
+    required: true
+  caching:
+    description: 'Whether to cache dependencies or not.'
+    required: false
+    default: 'true'
 runs:
   using: 'composite'
   steps:
     - name: Cache dependencies
+      if: inputs.caching == 'true'
       id: cache
       uses: actions/cache@v3
       with:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
       run: |
-        cd section9-demo
+        cd ${{ inputs.package-lock-file-path }}
         npm ci
       shell: bash #when using actions it is required to inform which shell will be used
