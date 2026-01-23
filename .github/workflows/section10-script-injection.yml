@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign label
+        env:
+          TITLE: ${{ github.event.issue.title }} -> it is always recommended to use env var to extract user input information. The input is evaluated by github action not in the shell
+          #issue_title="${{ github.event.issue.title }}" -> here, the shell is evaluating, therefore an injection can happen
         run: |
-          issue_title="${{ github.event.issue.title }}"
-          if [[ "$issue_title" == *"bug"* ]]; then
+          if [[ "$TITLE" == *"bug"* ]]; then
           echo "Issue is about a bug!"
           else
           echo "Issue is not about a bug"
