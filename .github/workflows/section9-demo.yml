@@ -7,6 +7,7 @@ on:
       - '**/section9-demo/**'
       - '**/workflows/section9-demo.yml'
       - '**/actions/cached-deps/action.yml'
+      - '**/actions/deploy-s3-javascript/action.yml'
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -90,3 +91,8 @@ jobs:
         run: ls
       - name: Deploy site
         run: echo "Deploying..."
+  information:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run custom javascript action
+        uses: ./github/actions/deploy-s3-javascript
